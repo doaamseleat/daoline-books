@@ -1,17 +1,17 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dhaal (ذ) – How to Pronounce the Arabic Letter Dhaal | Daoline Books</title><meta name="description" content="Hear how to say the Arabic letter Dhaal (ذَال): its name, its sound, the word ذُرَة (corn) and the sentence “The corn is yellow.” Free audio from the Arabic Alphabet Workbook for Kids."><link rel="canonical" href="https://doaamseleat.github.io/daoline-books/9/"><meta property="og:title" content="Dhaal (ذ) – How to Pronounce the Arabic Letter Dhaal | Daoline Books"><meta property="og:description" content="Hear how to say the Arabic letter Dhaal (ذَال): its name, its sound, the word ذُرَة (corn) and the sentence “The corn is yellow.” Free audio from the Arabic Alphabet Workbook for Kids."><meta property="og:image" content="https://doaamseleat.github.io/daoline-books/assets/1_cover.jpg"><meta property="og:url" content="https://doaamseleat.github.io/daoline-books/9/">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dhaal (ذ) – How to Pronounce the Arabic Letter Dhaal | Daoline Books</title><meta name="description" content="Hear how to say the Arabic letter Dhaal (ذَال): its name, its sound, the word ذُرَة (corn) and the sentence “The corn is yellow.” Free audio from the Arabic Alphabet Workbook for Kids."><link rel="canonical" href="https://books.daolinedigital.com/9/"><meta property="og:title" content="Dhaal (ذ) – How to Pronounce the Arabic Letter Dhaal | Daoline Books"><meta property="og:description" content="Hear how to say the Arabic letter Dhaal (ذَال): its name, its sound, the word ذُرَة (corn) and the sentence “The corn is yellow.” Free audio from the Arabic Alphabet Workbook for Kids."><meta property="og:image" content="https://books.daolinedigital.com/assets/1_cover.jpg"><meta property="og:url" content="https://books.daolinedigital.com/9/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&family=Nunito:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/daoline-books/style.css"></head><body><div class="top">Letter 9 of 28</div><div class="card">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&family=Nunito:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css"></head><body><div class="top">Letter 9 of 28</div><div class="card">
 <div class="big ar">ذ</div><div class="name">Dhaal <span class="ar">ذَال</span></div>
-<div class="word"><span class="w ar">ذُرَة</span><span class="m">corn</span></div><img src="/daoline-books/img/09.png" alt="corn">
+<div class="word"><span class="w ar">ذُرَة</span><span class="m">corn</span></div><img src="../img/09.png" alt="corn">
 <button class="play" id="p">▶ Listen</button>
 <div class="row"><button data-s="0"><span class="ar">ذَال</span>Name</button><button data-s="1"><span class="ar">ذَ</span>Sound</button><button data-s="2"><span class="ar">ذُرَة</span>Word</button></div>
 <div class="sent"><div class="sa ar">الذُّرَةُ صَفْرَاءُ.</div><div class="se">The corn is yellow.</div><button class="play s2" id="ps">▶ Sentence</button></div></div>
-<nav><a href="/daoline-books/8/">← Daal</a><a href="/daoline-books/letters/">All</a><a href="/daoline-books/10/">Raa →</a></nav><script>
+<nav><a href="../8/">← Daal</a><a href="../letters/">All</a><a href="../10/">Raa →</a></nav><script>
 const T=["ذَال", "ذَ", "ذُرَة"], N='09', PARTS=[[0.52, 1.34], [1.73, 2.24], [2.68, 3.33]];
 let ctx=null,cur=null;const bufs={};
 function speak(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='ar-SA';u.rate=.7;const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('ar'));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
 async function load(name){if(bufs[name])return bufs[name];
- for(const ext of ['.mp3','.wav']){try{const r=await fetch('/daoline-books/audio/'+name+ext);if(!r.ok)continue;const ab=await r.arrayBuffer();bufs[name]=await ctx.decodeAudioData(ab);return bufs[name]}catch(e){}}
+ for(const ext of ['.mp3','.wav']){try{const r=await fetch('../audio/'+name+ext);if(!r.ok)continue;const ab=await r.arrayBuffer();bufs[name]=await ctx.decodeAudioData(ab);return bufs[name]}catch(e){}}
  throw new Error('no audio')}
 async function play(name,st,en,fallback){
  try{if(!ctx)ctx=new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')await ctx.resume();
@@ -22,4 +22,4 @@ async function play(name,st,en,fallback){
 document.getElementById('p').onclick=()=>play(N,0,0,T.join(' ، '));
 document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const k=+b.dataset.s;play(N,PARTS[k][0],PARTS[k][1],T[k])});
 document.getElementById('ps').onclick=()=>play('s'+N,0,0,document.querySelector('.sa').textContent);
-</script><a class="bookcta" href="/daoline-books/">📘 Get the Arabic Alphabet Workbook</a><footer>Daoline Books · Arabic Alphabet Workbook</footer></body></html>
+</script><a class="bookcta" href="../">📘 Get the Arabic Alphabet Workbook</a><footer>Daoline Books · Arabic Alphabet Workbook</footer></body></html>
