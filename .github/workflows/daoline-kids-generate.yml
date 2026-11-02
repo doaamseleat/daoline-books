@@ -1,0 +1,54 @@
+name: Daoline Kids - Generate Episode
+
+on:
+  workflow_dispatch:
+    inputs:
+      letter:
+        description: "Verified letter number (currently only 1)"
+        required: true
+        default: "1"
+        type: choice
+        options:
+          - "1"
+      dry_run:
+        description: "Preview only (no Claude API charge)"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: kids-production-studio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Preview prompt or generate draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
+          MAX_OUTPUT_TOKENS: "3500"
+          LETTER: ${{ inputs.letter }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            node src/generate.mjs --letter "$LETTER" --dry-run
+          else
+            node src/generate.mjs --letter "$LETTER"
+          fi
+      - name: Save generated draft as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daoline-kids-letter-${{ inputs.letter }}-${{ github.run_number }}
+          path: kids-production-studio/output/
+          retention-days: 30
