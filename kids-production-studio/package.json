@@ -1,0 +1,17 @@
+{
+  "name": "daoline-kids-production-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pilot": "node src/generate.mjs --letter 1 --dry-run",
+    "generate": "node src/generate.mjs --letter 1",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0"
+  }
+}
