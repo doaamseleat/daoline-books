@@ -14,7 +14,19 @@ const letter = letters.find(x=>x.number===number);
 if (!letter) throw new Error('This letter has not yet been verified against the published companion page. Add a verified record to data/letters.json first.');
 const bible = await fs.readFile(path.join(base,'SERIES_BIBLE.md'),'utf8');
 const template = await fs.readFile(path.join(base,'prompts/episode-generator.md'),'utf8');
-const prompt = [template,'\n## Approved series bible\n',bible,'\n## Verified letter input (JSON)\n',JSON.stringify(letter,null,2),'\nFORMAT: 9:16\nDURATION_SECONDS: 90\nAPPROVED_CHARACTERS: Asad, Jamal\nSTORY_PROBLEM: a missing golden letter star\nRespond with structured Markdown. Mark any unverified workbook detail NEEDS VERIFICATION.'].join('\n');
+const prompt = [
+'Create ONE complete, concise production-ready episode outline. English narration, Arabic teaching only for verified letter. Do not produce verbose explanations.',
+'Series reference (follow character and safety rules):', bible,
+'Verified letter:', JSON.stringify(letter),
+'FORMAT 9:16; DURATION 90 seconds; story: missing golden letter star.',
+'Output exactly these sections:',
+'1. EPISODE (title, one-line learning goal)',
+'2. SCRIPT: 9 timed scenes, each 10 seconds. For each scene: visuals (max 20 words), dialogue/narration (max 25 words), on-screen text (max 8 words), SFX (max 5 words).',
+'3. VIDEO PROMPTS: 9 concise prompts (max 35 words each), with consistent characters and no generated Arabic typography.',
+'4. AUDIO: narration lines in scene order, with Arabic pronunciation guidance.',
+'5. EDIT CHECKLIST: 6 bullets for overlay, timing, captions, learning loop, safety, continuity.',
+'Maximum 1800 words overall. No preface, no alternative versions. Do not invent unverified book details.'
+].join('\n');
 const outputDir=path.join(base,'output');
 await fs.mkdir(outputDir,{recursive:true});
 const slug=String(number).padStart(2,'0');
@@ -25,7 +37,7 @@ if(dryRun) {
   process.exit(0);
 }
 if(!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is missing. Set it in your local environment; never commit it.');
-const maxTokens=Number(process.env.MAX_OUTPUT_TOKENS||8000);
+const maxTokens=Number(process.env.MAX_OUTPUT_TOKENS||4000);
 if(!Number.isInteger(maxTokens)||maxTokens<256||maxTokens>8000) throw new Error('MAX_OUTPUT_TOKENS must be 256–8000.');
 const { default: Anthropic }=await import('@anthropic-ai/sdk');
 const client=new Anthropic({apiKey:process.env.ANTHROPIC_API_KEY,maxRetries:0});
@@ -39,7 +51,7 @@ const model = preferred && available.includes(preferred) ? preferred : sonnets[0
 if (!model) throw new Error('No suitable Sonnet model is available to this account. Available model IDs: '+available.join(', '));
 if (preferred && preferred!==model) console.log('Configured model unavailable; using available Sonnet model '+model);
 console.log('Calling Claude API once for letter '+number+' using '+model+'. This is a billable request.');
-const response=await client.messages.create({model,max_tokens:maxTokens,messages:[{role:'user',content:prompt}]});
+const response=await client.messages.create({model,max_tokens:maxTokens,thinking:{type:'disabled'},messages:[{role:'user',content:prompt}]});
 const text=response.content.filter(block=>block.type==='text').map(block=>block.text).join('\n');
 if (response.stop_reason === 'max_tokens' || text.trim().length < 500) {
   throw new Error('Claude returned a truncated or empty draft (stop_reason='+response.stop_reason+', text_length='+text.length+'). No artifact saved. Increase output budget or adjust model effort before retrying.');
