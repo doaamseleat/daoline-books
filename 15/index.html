@@ -1,12 +1,12 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Ḍaad ض — Hear the letter</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ḍaad (ض) – How to Pronounce the Arabic Letter Ḍaad | Daoline Books</title><meta name="description" content="Hear how to say the Arabic letter Ḍaad (ضَاد): its name, its sound, the word ضِفْدَع (frog) and the sentence “The frog jumps.” Free audio from the Arabic Alphabet Workbook for Kids."><link rel="canonical" href="https://doaamseleat.github.io/daoline-books/15/"><meta property="og:title" content="Ḍaad (ض) – How to Pronounce the Arabic Letter Ḍaad | Daoline Books"><meta property="og:description" content="Hear how to say the Arabic letter Ḍaad (ضَاد): its name, its sound, the word ضِفْدَع (frog) and the sentence “The frog jumps.” Free audio from the Arabic Alphabet Workbook for Kids."><meta property="og:image" content="https://doaamseleat.github.io/daoline-books/assets/1_cover.jpg"><meta property="og:url" content="https://doaamseleat.github.io/daoline-books/15/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&family=Nunito:wght@700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/daoline-books/style.css"></head><body><div class="top">Letter 15 of 28</div><div class="card">
 <div class="big ar">ض</div><div class="name">Ḍaad <span class="ar">ضَاد</span></div>
-<div class="word"><span class="w ar">ضِفْدَع</span><span class="m">frog</span></div><img src="https://daolinedigital.com/ar/img/15.png" alt="frog">
+<div class="word"><span class="w ar">ضِفْدَع</span><span class="m">frog</span></div><img src="/daoline-books/img/15.png" alt="frog">
 <button class="play" id="p">▶ Listen</button>
 <div class="row"><button data-s="0"><span class="ar">ضَاد</span>Name</button><button data-s="1"><span class="ar">ضَ</span>Sound</button><button data-s="2"><span class="ar">ضِفْدَع</span>Word</button></div>
 <div class="sent"><div class="sa ar">الضِّفْدَعُ يَقْفِزُ.</div><div class="se">The frog jumps.</div><button class="play s2" id="ps">▶ Sentence</button></div></div>
-<nav><a href="/daoline-books/14/">← Ṣaad</a><a href="/daoline-books/">All</a><a href="/daoline-books/16/">Ṭaa →</a></nav><script>
+<nav><a href="/daoline-books/14/">← Ṣaad</a><a href="/daoline-books/letters/">All</a><a href="/daoline-books/16/">Ṭaa →</a></nav><script>
 const T=["ضَاد", "ضَ", "ضِفْدَع"], N='15', PARTS=[[0.33, 1.27], [1.73, 2.32], [2.84, 3.73]];
 let ctx=null,cur=null;const bufs={};
 function speak(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='ar-SA';u.rate=.7;const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('ar'));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
@@ -22,4 +22,4 @@ async function play(name,st,en,fallback){
 document.getElementById('p').onclick=()=>play(N,0,0,T.join(' ، '));
 document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const k=+b.dataset.s;play(N,PARTS[k][0],PARTS[k][1],T[k])});
 document.getElementById('ps').onclick=()=>play('s'+N,0,0,document.querySelector('.sa').textContent);
-</script><footer>Daoline Books · Arabic Alphabet Workbook</footer></body></html>
+</script><a class="bookcta" href="/daoline-books/">📘 Get the Arabic Alphabet Workbook</a><footer>Daoline Books · Arabic Alphabet Workbook</footer></body></html>

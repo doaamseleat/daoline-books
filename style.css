@@ -12,3 +12,4 @@ nav{display:flex;justify-content:space-between;width:100%;max-width:440px;margin
 .sent{margin-top:22px;padding-top:18px;border-top:2px dashed #f0dcb4}.sa{font-size:32px;font-weight:700}.se{font-size:17px;color:#666;margin-top:4px}.play.s2{background:#f2a20c;margin-top:12px}
 .also{color:#666;font-size:15px}
 footer{margin-top:28px;font-size:13px;color:#9a8a70}
+.bookcta{display:inline-block;margin-top:22px;background:#c013a6;color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:999px}
