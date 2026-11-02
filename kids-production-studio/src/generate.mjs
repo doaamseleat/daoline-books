@@ -25,7 +25,7 @@ if(dryRun) {
   process.exit(0);
 }
 if(!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is missing. Set it in your local environment; never commit it.');
-const maxTokens=Number(process.env.MAX_OUTPUT_TOKENS||3500);
+const maxTokens=Number(process.env.MAX_OUTPUT_TOKENS||8000);
 if(!Number.isInteger(maxTokens)||maxTokens<256||maxTokens>8000) throw new Error('MAX_OUTPUT_TOKENS must be 256–8000.');
 const { default: Anthropic }=await import('@anthropic-ai/sdk');
 const client=new Anthropic({apiKey:process.env.ANTHROPIC_API_KEY,maxRetries:0});
@@ -41,6 +41,9 @@ if (preferred && preferred!==model) console.log('Configured model unavailable; u
 console.log('Calling Claude API once for letter '+number+' using '+model+'. This is a billable request.');
 const response=await client.messages.create({model,max_tokens:maxTokens,messages:[{role:'user',content:prompt}]});
 const text=response.content.filter(block=>block.type==='text').map(block=>block.text).join('\n');
+if (response.stop_reason === 'max_tokens' || text.trim().length < 500) {
+  throw new Error('Claude returned a truncated or empty draft (stop_reason='+response.stop_reason+', text_length='+text.length+'). No artifact saved. Increase output budget or adjust model effort before retrying.');
+}
 const filename=path.join(outputDir,slug+'-episode-draft.md');
 await fs.writeFile(filename,text,'utf8');
 console.log(JSON.stringify({file:filename,model:response.model,usage:response.usage,stop_reason:response.stop_reason},null,2));
