@@ -1,0 +1,16 @@
+[
+  {
+    "number": 1,
+    "name": "Alif",
+    "display": "ا",
+    "sound": "أَ",
+    "word_ar": "أَسَد",
+    "word_romanized": "Asad",
+    "word_en": "lion",
+    "page": "https://books.daolinedigital.com/1/",
+    "audio": "https://books.daolinedigital.com/audio/01.mp3",
+    "sentence_ar": "الأَسَدُ قَوِيٌّ.",
+    "sentence_en": "The lion is strong.",
+    "verified_from": "published companion page /1/; workbook page not independently checked"
+  }
+]
