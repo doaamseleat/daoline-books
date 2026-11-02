@@ -4,12 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       letter:
-        description: "Verified letter number (currently only 1)"
+        description: "Verified letter number (1 or 2)"
         required: true
         default: "1"
         type: choice
         options:
           - "1"
+          - "2"
       dry_run:
         description: "Preview only (no Claude API charge)"
         required: true
