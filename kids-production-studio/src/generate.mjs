@@ -51,7 +51,7 @@ const model = preferred && available.includes(preferred) ? preferred : sonnets[0
 if (!model) throw new Error('No suitable Sonnet model is available to this account. Available model IDs: '+available.join(', '));
 if (preferred && preferred!==model) console.log('Configured model unavailable; using available Sonnet model '+model);
 console.log('Calling Claude API once for letter '+number+' using '+model+'. This is a billable request.');
-const response=await client.messages.create({model,max_tokens:maxTokens,thinking:{type:'disabled'},messages:[{role:'user',content:prompt}]});
+const response=await client.messages.create({model,max_tokens:maxTokens,thinking:{type:'between_tools'},messages:[{role:'user',content:prompt}]});
 const text=response.content.filter(block=>block.type==='text').map(block=>block.text).join('\n');
 if (response.stop_reason === 'max_tokens' || text.trim().length < 500) {
   throw new Error('Claude returned a truncated or empty draft (stop_reason='+response.stop_reason+', text_length='+text.length+'). No artifact saved. Increase output budget or adjust model effort before retrying.');
