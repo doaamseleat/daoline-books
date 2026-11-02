@@ -12,5 +12,19 @@
     "sentence_ar": "الأَسَدُ قَوِيٌّ.",
     "sentence_en": "The lion is strong.",
     "verified_from": "published companion page /1/; workbook page not independently checked"
+  },
+  {
+    "number": 2,
+    "name": "Baa",
+    "display": "ب",
+    "sound": "بَ",
+    "word_ar": "بَطَّة",
+    "word_romanized": "Batta",
+    "word_en": "duck",
+    "page": "https://books.daolinedigital.com/2/",
+    "audio": "https://books.daolinedigital.com/audio/02.mp3",
+    "sentence_ar": "البَطَّةُ تَسْبَحُ.",
+    "sentence_en": "The duck swims.",
+    "verified_from": "published companion page /2/; workbook page not independently checked"
   }
 ]
