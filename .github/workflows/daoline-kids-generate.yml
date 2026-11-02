@@ -37,7 +37,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL || 'claude-sonnet-4-5-20250929' }}
-          MAX_OUTPUT_TOKENS: "3500"
+          MAX_OUTPUT_TOKENS: "8000"
           LETTER: ${{ inputs.letter }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
