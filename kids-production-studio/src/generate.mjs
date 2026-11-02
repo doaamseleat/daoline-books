@@ -29,8 +29,15 @@ const maxTokens=Number(process.env.MAX_OUTPUT_TOKENS||3500);
 if(!Number.isInteger(maxTokens)||maxTokens<256||maxTokens>8000) throw new Error('MAX_OUTPUT_TOKENS must be 256–8000.');
 const { default: Anthropic }=await import('@anthropic-ai/sdk');
 const client=new Anthropic({apiKey:process.env.ANTHROPIC_API_KEY,maxRetries:0});
-const model=process.env.CLAUDE_MODEL;
-if(!model) throw new Error('Set CLAUDE_MODEL to an available model ID in your Claude account before running a paid request.');
+// Discover available models with the account's own API key (no billable generation).
+const available = [];
+for await (const item of client.models.list({limit:100})) available.push(item.id);
+const preferred = process.env.CLAUDE_MODEL?.trim();
+const isSonnet = id => /claude-sonnet-/i.test(id);
+const sonnets = available.filter(isSonnet).sort((a,b)=>b.localeCompare(a,undefined,{numeric:true}));
+const model = preferred && available.includes(preferred) ? preferred : sonnets[0];
+if (!model) throw new Error('No suitable Sonnet model is available to this account. Available model IDs: '+available.join(', '));
+if (preferred && preferred!==model) console.log('Configured model unavailable; using available Sonnet model '+model);
 console.log('Calling Claude API once for letter '+number+' using '+model+'. This is a billable request.');
 const response=await client.messages.create({model,max_tokens:maxTokens,messages:[{role:'user',content:prompt}]});
 const text=response.content.filter(block=>block.type==='text').map(block=>block.text).join('\n');
